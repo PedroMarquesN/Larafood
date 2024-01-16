@@ -31,4 +31,20 @@ class Plan extends Model
         return $results;
 
     }
+
+    public function profilesAvailable($filter = null)
+    {
+        $profiles = Profile::whereNotIn('profiles.id', function($query) {
+            $query->select('plan_profile.profile_id');
+            $query->from('plan_profile');
+            $query->whereRaw("plan_profile.plan_id={$this->id}");
+        })
+        ->where(function ($queryFilter) use ($filter) {
+            if ($filter)
+                $queryFilter->where('profiles.name', 'LIKE', "%{$filter}%");
+        })
+        ->paginate();
+
+        return $profiles;
+    }
 }

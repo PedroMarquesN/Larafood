@@ -1,15 +1,15 @@
 @extends('adminlte::page')
 
-@section('title', "Editar o plano {{$plan->name}}")
+@section('title', "Editar o plano {$plan->name}")
 
 @section('content_header')
-    <h1>Editar o Plano {{$plan->name}}</h1>
+    <h1>Editar o plano {{ $plan->name }}</h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-body">
-            <form action="{{route('plans.update', $plan->url)}}" class="form" method="POST">
+            <form action="{{ route('plans.update', $plan->url) }}" class="form" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -17,5 +17,4 @@
             </form>
         </div>
     </div>
-
 @endsection
