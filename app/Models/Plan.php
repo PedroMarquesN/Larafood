@@ -21,6 +21,9 @@ class Plan extends Model
 
     }
     
+    public function tenants(){
+        return $this->hasMany(Tenant::class);
+    }
     public function search($filter = null)
     {
         $results = $this
